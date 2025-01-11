@@ -5,5 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.user.management.model.user;
 
 public interface UserRepository extends MongoRepository <user,String>{
-
+    void deleteByEmail(String email);
+    boolean existsByEmail(String email);
 }

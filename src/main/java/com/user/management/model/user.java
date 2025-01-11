@@ -6,15 +6,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class user {
 
     @Id
-    private String id;
+    private String empId;
+    private String email;
     private String name;
-    private int age;
+    private String designation;
+    private String role = "employee";
+    private String password;
+    // private int age;
 
-    public user(String id, String name, int age){
+    public user(String empId, String email,String name, String designation,String password){
         super();
-        this.id = id;
+        this.empId = empId;
+        this.email = email;
         this.name = name;
-        this.age = age;
+        this.designation = designation;
+        this.password = password;
     }
 
     // Getter for 'name'
@@ -27,19 +33,51 @@ public class user {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public String getDesignation() {
+        return designation;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
-    public String getId() {
-        return id;
+    public String getRole() {
+        return role;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    // public int getAge() {
+    //     return age;
+    // }
+
+    // public void setAge(int age) {
+    //     this.age = age;
+    // }
+
+    public String getempId() {
+        return empId;
+    }
+
+    public void setempId(String empId) {
+        this.empId = empId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

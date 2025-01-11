@@ -1,5 +1,6 @@
 package com.user.management.service;
 
+import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,11 +23,29 @@ public class UserService {
     public List<user> getAll(){
         List<user> list = userRepository.findAll();
         
-        for (user u : list) {
-            System.out.println("User ID: " + u.getId() + ", Name: " + u.getName() + ", Age: " + u.getAge());
-        }
+        // for (user u : list) {
+        //     System.out.println("User ID: " + u.getId() + ", Name: " + u.getName() + ", Age: " + u.getAge());
+        // }
         
         return list;
+    }
+
+    public user signin(user user){
+        String empId = user.getempId();
+        System.out.println(empId);
+        
+        Optional<user> optionalUser = userRepository.findById(empId);
+        
+
+        if(optionalUser.isPresent()){
+            if(optionalUser.get().getPassword().equals(user.getPassword())){
+                return optionalUser.get();
+            }else{
+                return null;
+            }
+        }
+        
+        return null;
     }
 
     public user getUserById(String id){
@@ -41,16 +60,16 @@ public class UserService {
 
     public user updateUser(String id,user updatedUser){
         if(userRepository.existsById(id)){
-            updatedUser.setId(id);
+            updatedUser.setempId(id);
             return userRepository.save(updatedUser);
         }
         
         return null;
     }
 
-    public String deleteUser(String id){
-        if(userRepository.existsById(id)){
-            userRepository.deleteById(id);
+    public String deleteUser(String email){
+        if(userRepository.existsByEmail(email)){
+            userRepository.deleteByEmail(email);
 
             return "User Deleted!";
         }
